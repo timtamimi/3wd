@@ -5,25 +5,28 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
-import { TextField } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 
 function App() {
-  const [mode, setMode] = useState("date-to-strings");
+  const [mode, setMode] = useState("date-to-string");
   const [inputDate, setInputDate] = useState(new Date("2020-01-01"));
   const [inputString, setInputString] = useState("mailbox.bat.toe");
 
   return (
     <>
-      <div>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
         <ToggleButtonGroup
           value={mode}
           exclusive
-          onChange={(e, v) => setMode(v)}
+          onChange={(e, v) => v && setMode(v)}
           aria-label="text alignment"
         >
           <ToggleButton value="date-to-string">Date to string</ToggleButton>
           <ToggleButton value="string-to-date">String to date</ToggleButton>
         </ToggleButtonGroup>
+        </Grid>
+        <Grid item xs={12}>
         {mode === "date-to-string" && (
           <>
             <div>
@@ -32,6 +35,7 @@ function App() {
                 label="Date"
                 type="date"
                 value={inputDate.toISOString().split("T")[0]}
+                InputProps={{inputProps: { min: "1900-01-01", max: "2100-01-01"} }}
                 onChange={(e) => setInputDate(new Date(e.target.value))}
               />
             </div>
@@ -51,7 +55,8 @@ function App() {
             </Typography>
           </>
         )}
-      </div>
+        </Grid>
+      </Grid>
     </>
   );
 }
