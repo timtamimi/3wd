@@ -14,6 +14,6 @@ const getKeyByValue = (obj: Object, value: any): string =>
   "error";
 
 export function parseString(inputString: string): Date {
-  const value = getKeyByValue(dataset, inputString);
+  const value = getKeyByValue(dataset, inputString.toLowerCase());
   return new Date(value);
 }
